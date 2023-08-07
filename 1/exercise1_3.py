@@ -61,13 +61,7 @@ plt.show()
 df_gdp = pd.read_csv("gdp_per_capita_finland.csv")
 df_gdp.plot(x="year", y="GDP per capita (USD)", kind="line")
 
-
-
-
-
-
-
-
+plt.show()
 
 
 
@@ -104,9 +98,6 @@ X_test = pf.transform(std_X_test)
 
 print("X_train.shape =", X_train.shape)
 print("X_test.shape =", X_test.shape)
-
-
-
 
 
 
@@ -155,15 +146,12 @@ plt.plot(X0[:,0], y0, c="black")                # drawing the regression line
 plt.show()
 
 
-
-
-
 #================== Exercise 1.3 Ridge ==========================
 from sklearn.linear_model import Ridge
 
 # Model definition (Choose one of the models below)
 #model = LinearRegression(fit_intercept = True)      # model definition (using y = a0*x + a1*x^2 + b)
-model = Ridge(alpha = 10, fit_intercept = True)    # model definition
+model = Ridge(alpha = 2, fit_intercept = True)    # model definition
 #model = Lasso(alpha = 10, fit_intercept = True)    # model definition
 
 # Parameter optimization and prediction
@@ -203,46 +191,46 @@ plt.show()
 
 
 #================== Exercise 1.3 Lasso ==========================
-from sklearn.linear_model import Ridge
-
-# Model definition (Choose one of the models below)
-#model = LinearRegression(fit_intercept = True)      # model definition (using y = a0*x + a1*x^2 + b)
-#model = Ridge(alpha = 10, fit_intercept = True)    # model definition
-model = Lasso(alpha = 10, fit_intercept = True)    # model definition
-
-# Parameter optimization and prediction
-model.fit(X_train, t_train)
-y_train = model.predict(X_train)
-y_test = model.predict(X_test)
-
-# Evaluation of the model
-R2_train =  model.score(X_train, t_train)
-R2_test =  model.score(X_test, t_test)
-#rmse_train = np.sqrt(np.average(np.abs(t_train - y_train))) ???
-#rmse_test = np.sqrt(np.average(np.abs(t_test - y_test))) ???
+#from sklearn.linear_model import Lasso
+#
+## Model definition (Choose one of the models below)
+##model = LinearRegression(fit_intercept = True)      # model definition (using y = a0*x + a1*x^2 + b)
+##model = Ridge(alpha = 10, fit_intercept = True)    # model definition
+#model = Lasso(alpha = 10, fit_intercept = True)    # model definition
+#
+## Parameter optimization and prediction
+#model.fit(X_train, t_train)
+#y_train = model.predict(X_train)
+#y_test = model.predict(X_test)
+#
+## Evaluation of the model
+#R2_train =  model.score(X_train, t_train)
+#R2_test =  model.score(X_test, t_test)
+##rmse_train = np.sqrt(np.average(np.abs(t_train - y_train))) ???
+##rmse_test = np.sqrt(np.average(np.abs(t_test - y_test))) ???
+###
+##print("Lasso W =", model.coef_)
+##print("Lasso b =", model.intercept_)
+##print("Lasso R^2_train =", R2_train)
+##print("Lasso R^2_test =", R2_test)
+##print("Lasso RMSE(train) =", rmse_train)
+##print("Lasso RMSE(test) =", rmse_test)
 ##
-#print("Lasso W =", model.coef_)
-#print("Lasso b =", model.intercept_)
-#print("Lasso R^2_train =", R2_train)
-#print("Lasso R^2_test =", R2_test)
-#print("Lasso RMSE(train) =", rmse_train)
-#print("Lasso RMSE(test) =", rmse_test)
-#
-#
-## Drawing the regression line
-#np_X0 = np.arange(1950, 2030, 1)                        # [1950, 1951, ... , 2029]
-#df_X0 = pd.DataFrame(data = np_X0, columns=["year"])    # Convert into pandas DatFrame
-#std_X0 = scaler.transform(df_X0[["year"]])              # Standardization for X0
-#X0 = pf.transform(std_X0)                               # extend X0 to polynomial
-#y0 = model.predict(X0)
-#
-#plt.scatter(X_train[:,0], t_train, c="blue")    # plotting the training dataset
-#plt.plot(X0[:,0], y0, c="black")                # drawing the regression line
-#plt.show()
-#
-#plt.scatter(X_test[:,0], t_test, c="orange")    # plotting the training dataset
-#plt.plot(X0[:,0], y0, c="black")                # drawing the regression line
-#plt.show()
+##
+### Drawing the regression line
+##np_X0 = np.arange(1950, 2030, 1)                        # [1950, 1951, ... , 2029]
+##df_X0 = pd.DataFrame(data = np_X0, columns=["year"])    # Convert into pandas DatFrame
+##std_X0 = scaler.transform(df_X0[["year"]])              # Standardization for X0
+##X0 = pf.transform(std_X0)                               # extend X0 to polynomial
+##y0 = model.predict(X0)
+##
+##plt.scatter(X_train[:,0], t_train, c="blue")    # plotting the training dataset
+##plt.plot(X0[:,0], y0, c="black")                # drawing the regression line
+##plt.show()
+##
+##plt.scatter(X_test[:,0], t_test, c="orange")    # plotting the training dataset
+##plt.plot(X0[:,0], y0, c="black")                # drawing the regression line
+##plt.show()
 
 
 
