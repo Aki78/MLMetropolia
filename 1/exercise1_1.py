@@ -113,7 +113,6 @@ epsilons = _y - _t
 ave_epsilon = np.sum(_y - _t)/len(_t)
 ave_epsilon2 = np.sum(np.square(_y - _t)/len(_t))
 
-
 ave_t = np.sum(_t)/len(_t)
 ave_t2 = np.sum(np.square(_t)/len(_t))
 
@@ -165,15 +164,49 @@ from sklearn.linear_model import LinearRegression
 # Then calculate R^2 score and MSE on both training and test set.
 
 model = LinearRegression()
-model.
+model.fit(X_train,t_train)
 
-y_train =
-y_test =
+y_train = model.coef_*X_train + model.intercept_ 
+y_test = model.coef_*X_test +  model.intercept_
 
-R2_train =
-R2_test =
-rmse_train =
-rmse_test =
+_X_train = X_train.to_numpy().reshape(-1)
+_t_train = t_train.to_numpy().reshape(-1)
+_y_train = y_train.to_numpy().reshape(-1)
+
+
+_X_test = X_test.to_numpy().reshape(-1)
+_t_test = t_test.to_numpy().reshape(-1)
+_y_test = y_test.to_numpy().reshape(-1)
+
+
+ave_epsilon_train = np.sum(_y_train - _t_train)/len(_t_train)
+ave_epsilon2_train = np.sum(np.square(_y_train - _t_train)/len(_t_train))
+
+ave_t_train = np.sum(_t)/len(_t_train)
+ave_t2_train = np.sum(np.square(_t_train)/len(_t_train))
+
+Vepsilon_train = ave_epsilon2_train - ave_epsilon_train*ave_epsilon_train
+Vt_train       = ave_t2_train - ave_t_train*ave_t_train
+
+
+ave_epsilon_test = np.sum(_y_test - _t_test)/len(_t_test)
+ave_epsilon2_test = np.sum(np.square(_y_test - _t_test)/len(_t_test))
+
+ave_t_test = np.sum(_t)/len(_t_test)
+ave_t2_test = np.sum(np.square(_t_test)/len(_t_test))
+
+Vepsilon_test = ave_epsilon2_test - ave_epsilon_test*ave_epsilon_test
+Vt_test       = ave_t2_test - ave_t_test*ave_t_test
+
+
+
+R2 = 1 - Vepsilon/Vt
+rmse = np.sqrt(np.sqrt(np.dot(_y-_t,_y-_t))/len(_t))
+
+R2_train = 1 - Vepsilon_train/Vt_train
+R2_test = 1 - Vepsilon_test/Vt_test
+rmse_train = np.sqrt(np.sqrt(np.dot(_y_train-_t_train,_y_train-_t_train))/len(_t_train))
+rmse_test = np.sqrt(np.sqrt(np.dot(_y_test-_t_test,_y_test-_t_test))/len(_t_test))
 
 # =====================================================================
 
